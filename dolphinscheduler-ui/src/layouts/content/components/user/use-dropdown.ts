@@ -37,7 +37,9 @@ export function useDropDown() {
   }
 
   const useLogout = () => {
-    logout().then(() => {
+    logout().then((res: any) => {
+      // eslint-disable-next-line no-console
+      console.log('logout接口返回:', res)
       userStore.setSessionId('')
       userStore.setSecurityConfigType('')
       userStore.setUserInfo({})
@@ -45,7 +47,12 @@ export function useDropDown() {
       userStore.setBaseUdfDir('')
       cookies.remove('sessionId')
 
-      router.push({ path: '/login' })
+      // 直接判断res.logoutUrl
+      if (res && res.logoutUrl) {
+        window.location.href = res.logoutUrl
+      } else {
+        router.push({ path: '/login' })
+      }
     })
   }
 

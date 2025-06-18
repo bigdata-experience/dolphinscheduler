@@ -1,0 +1,67 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+
+security:
+  authentication:
+    # Authentication types (supported types: PASSWORD,LDAP,CASDOOR_SSO)
+    type: CASDOOR_SSO
+    casdoor:
+      user:
+        admin: "admin"
+casdoor:
+  # Your Casdoor server url
+  endpoint: "http://192.168.133.103:8000"
+  client-id: "6a885b659b4b4610517e"
+  client-secret: "b3617545cf2ac3b7a6f5be98c1d08bc7afa22807"
+  # The certificate may be multi-line, you can use `|-` for ease
+  certificate: |
+    -----BEGIN CERTIFICATE-----
+    MIIE3TCCAsWgAwIBAgIDAeJAMA0GCSqGSIb3DQEBCwUAMCgxDjAMBgNVBAoTBWFk
+    bWluMRYwFAYDVQQDEw1jZXJ0LWJ1aWx0LWluMB4XDTI1MDUyMzE1MDQxM1oXDTQ1
+    MDUyMzE1MDQxM1owKDEOMAwGA1UEChMFYWRtaW4xFjAUBgNVBAMTDWNlcnQtYnVp
+    bHQtaW4wggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDbpolyDiVJWSqL
+    x8T7aIQmWmsaEMNCxBSYi1kpU7WedHXibtMm8Iul7XJQeAD8DyBhXEjXmvZHE1eF
+    loi058DiHFAmUZIhHyjNFfwp3KCMqHIFJENhEwiS/HbfiQ560/aoDTFVCOeE6X2n
+    Hz03WKV2j0WMAkBLDr2WdWlFFTR4pXCFoTXnh9fOgfzeig4Xy90Le4okmk8Hkj46
+    Gkojxl+FU/E87BvhD6ek03MKgqhUJqNB0y/qo4E30xQpI0wE+Lh886mEMWsLx3VX
+    a09yb1loR0SpRuxdeHAcsnNiYYpBjGzAYWvu93ACPUp8WtvNycB/38E0vwhdkPjq
+    EUvVj51lgpt1ItIGHsx4+j90A0FfU6Txs9ssA3FneXYeqrg3uOm8fSuORQRukZCp
+    59lPiGs5TvfVShpGO3DvCka9grzQQgYy//5cQZ59qB3XonKVL2vjAmO4ZvYN/hG8
+    8eSnTEbENMO4NyJ/GeUtzBwhqY9y163OfvZuKkZyfBUtCV7SHO8+oykp6c+SFw6Q
+    3X9GlrWFhuZuNIABIkI7elJYDn7hBlcwB7xa7VN79o09axeZf3M8epzt0TSlCuKb
+    cFXAnPmEOGNJLryaEoyjvzZPgHAn2nB6o5kwQSaqb/wgt1McmEfpiXCINC4NZs6s
+    sxPfClAfx+4WIAf8lrPZRAe97qRW5QIDAQABoxAwDjAMBgNVHRMBAf8EAjAAMA0G
+    CSqGSIb3DQEBCwUAA4ICAQBYUEUEDcFB04WLvbpsAa9qzY2GGf9AQERGwvL7a3lY
+    5Za8c02LnUYl8OvE7Ktwsb4dqWiX0FRcmuEVAdjAj0qEfu/j0GVQ2V3MNik0hvRN
+    DRIWGRG6aXsxLJuBkkUrddxsi/+DzRmzYBeLNIHruSKhZcabDptXB/A2+xYcjJdY
+    ZyVwoTJsn0kiyU08eLsMR32Z+AXQXR7eYV+tAQtFNStCug4xIzRabTOTVTvvPDnk
+    BoC2l6Je/ScUxIwm6KOA9ATALf6H8UjUtSyeBW2yWM57+JoIZ8hR5MSX+7Mxf/Aa
+    RwQyRLhSDHxz6R7G7J+zAsH0w3dPUqPE1dU8BtknYvrnPRkDrBP4EpCaqxx+k+Us
+    cCoGazq5QobXwVnLvay921teT8Njhir8XM1dnYucBpvHlJGutKDHHy6mpAlLaBcn
+    jtHmrlfZrH6VryF5oR1T1MIkZcEnkna50sEkrEFvF0lUhJeNyD8tgMZuQl5JLPOJ
+    S3BXDr3EIj/4YAcphBFTm8YmKZ7HfxnUMVu5dBmVX9zm1fo3I71CwZjLBDTFw8Ok
+    Q3yu3exoygTvG4lTnXEQwS7gL0YCNFMPVevsx55dhXyw8uZhmqmIB04Q4iXIU+Hu
+    xObCNtmRhWlilFw0T4rWaoLdw7OOy5gPZOTUeLq3H6K6xe7KWPZicvdOJdz2lsRQ
+    gg==
+    -----END CERTIFICATE-----
+  # Your organization name added in Casdoor
+  organization-name: "built-in"
+  # Your application name added in Casdoor
+  application-name: "app-built-in"
+  # Doplhinscheduler login url
+  redirect-url: "http://192.168.133.92:12345/dolphinscheduler/ui/login"

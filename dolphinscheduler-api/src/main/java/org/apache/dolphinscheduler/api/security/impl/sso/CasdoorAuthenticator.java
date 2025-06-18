@@ -86,4 +86,9 @@ public class CasdoorAuthenticator extends AbstractSsoAuthenticator {
         return casdoorAuthService.getSigninUrl(redirectUrl, state);
     }
 
+    @Override
+    public String getLogoutUrl() {
+        return "";
+    }
+
 }

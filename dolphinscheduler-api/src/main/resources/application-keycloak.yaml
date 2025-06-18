@@ -15,20 +15,26 @@
 # limitations under the License.
 #
 
-FROM eclipse-temurin:8-jre
 
-ENV DOCKER true
-ENV TZ Asia/Shanghai
-ENV DOLPHINSCHEDULER_HOME /opt/dolphinscheduler
-
-WORKDIR $DOLPHINSCHEDULER_HOME
-
-ADD ./target/api-server $DOLPHINSCHEDULER_HOME
-
-ARG ARTIFACT_HOST=https://nx.tyszxc.com/repository/raw-hosted
-# 支持mysql或者doris驱动
-ADD ${ARTIFACT_HOST}/mysql-connector-java-8.0.30.jar $DOLPHINSCHEDULER_HOME/libs/
-
-EXPOSE 12345 25333
-
-CMD [ "/bin/bash", "./bin/start.sh" ]
+security:
+  authentication:
+    # Authentication types (supported types: PASSWORD,LDAP,CASDOOR_SSO,KEYCLOAK_SSO)
+    type: KEYCLOAK_SSO
+    keycloak:
+      user:
+        # 设置管理员用户名，该用户将被赋予ADMIN权限
+        admin: admin
+      default:
+        # 设置默认租户，新用户将被分配到该租户
+        tenant: root
+frontend:
+  home:
+    path: /
+keycloak:
+  auth-server-url: http://192.168.133.102:8080
+  realm: portal
+  resource: dolphinscheduler
+  credentials:
+    secret: iyM9bRbbRBODhcGI2H92eihUIGXJO1Mg
+  redirect-uri: "http://localhost:5173/login"
+#  redirect-uri: "http://192.168.133.102:5173/dolphinscheduler/ui/login"

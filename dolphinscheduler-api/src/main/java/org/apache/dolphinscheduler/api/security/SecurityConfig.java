@@ -20,6 +20,7 @@ package org.apache.dolphinscheduler.api.security;
 import org.apache.dolphinscheduler.api.security.impl.ldap.LdapAuthenticator;
 import org.apache.dolphinscheduler.api.security.impl.pwd.PasswordAuthenticator;
 import org.apache.dolphinscheduler.api.security.impl.sso.CasdoorAuthenticator;
+import org.apache.dolphinscheduler.api.security.impl.sso.KeycloakAuthenticator;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -69,6 +70,9 @@ public class SecurityConfig {
                 break;
             case CASDOOR_SSO:
                 authenticator = new CasdoorAuthenticator();
+                break;
+            case KEYCLOAK_SSO:
+                authenticator = new KeycloakAuthenticator();
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + authenticationType);

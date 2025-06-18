@@ -27,6 +27,7 @@ import org.apache.dolphinscheduler.api.enums.Status;
 import org.apache.dolphinscheduler.api.exceptions.ApiException;
 import org.apache.dolphinscheduler.api.security.Authenticator;
 import org.apache.dolphinscheduler.api.security.impl.AbstractSsoAuthenticator;
+import org.apache.dolphinscheduler.api.security.impl.sso.KeycloakAuthenticator;
 import org.apache.dolphinscheduler.api.service.SessionService;
 import org.apache.dolphinscheduler.api.service.UsersService;
 import org.apache.dolphinscheduler.api.utils.Result;
@@ -165,11 +166,22 @@ public class LoginController extends BaseController {
     @PostMapping(value = "/signOut")
     @ApiException(SIGN_OUT_ERROR)
     public Result signOut(@Parameter(hidden = true) @RequestAttribute(value = Constants.SESSION_USER) User loginUser,
-                          HttpServletRequest request) {
+                          HttpServletRequest request, HttpServletResponse response) {
         String ip = getClientIpAddress(request);
         sessionService.expireSession(loginUser.getId());
         // clear session
         request.removeAttribute(Constants.SESSION_USER);
+
+        // 如果是SSO认证，返回登出URL给前端
+        if (authenticator instanceof AbstractSsoAuthenticator) {
+            String logoutUrl = ((AbstractSsoAuthenticator) authenticator).getLogoutUrl();
+            if (logoutUrl != null) {
+                Map<String, Object> result = new HashMap<>();
+                result.put("logoutUrl", logoutUrl);
+                return success(result);
+            }
+        }
+        
         return success();
     }
 

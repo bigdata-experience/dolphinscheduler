@@ -46,3 +46,10 @@ export function clearCookie(): any {
     method: 'delete'
   })
 }
+
+export function signOut(): any {
+  return axios({
+    url: '/signOut',
+    method: 'post'
+  })
+}
