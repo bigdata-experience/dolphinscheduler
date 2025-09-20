@@ -31,7 +31,7 @@ frontend:
   home:
     path: /
 keycloak:
-  auth-server-url: http://192.168.133.102:8080
+  auth-server-url: http://keycloak.datahinge.com
   realm: portal
   resource: dolphinscheduler
   credentials:

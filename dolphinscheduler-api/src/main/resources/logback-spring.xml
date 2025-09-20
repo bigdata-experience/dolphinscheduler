@@ -51,11 +51,12 @@
     <logger name="org.apache.hadoop" level="WARN"/>
 
     <root level="INFO">
-        <if condition="${DOCKER:-false}">
+        <!-- <if condition="${DOCKER:-false}">
             <then>
                 <appender-ref ref="STDOUT"/>
             </then>
-        </if>
+        </if> -->
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="APILOGFILE"/>
     </root>
 </configuration>

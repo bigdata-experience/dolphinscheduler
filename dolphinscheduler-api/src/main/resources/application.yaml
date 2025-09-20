@@ -32,7 +32,7 @@ server:
 
 spring:
   profiles:
-    active: postgresql
+    active: postgresql,keycloak
   banner:
     charset: UTF-8
   jackson:
@@ -46,9 +46,9 @@ spring:
     basename: i18n/messages
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:5432/dolphinscheduler
-    username: root
-    password: root
+    url: jdbc:postgresql://192.168.133.102:32321/dolphinscheduler
+    username: datahinge
+    password: datahinge@2025
     hikari:
       connection-test-query: select 1
       pool-name: DolphinScheduler

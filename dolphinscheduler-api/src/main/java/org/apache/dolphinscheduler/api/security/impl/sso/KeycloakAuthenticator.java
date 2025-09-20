@@ -72,8 +72,11 @@ public class KeycloakAuthenticator extends AbstractSsoAuthenticator {
         
         try {
             ResponseEntity<Map> response = restTemplate.exchange(tokenEndpoint, HttpMethod.POST, entity, Map.class);
+            log.info("Token response status: {}", response.getStatusCode());
+            log.info("Token response body: {}", response.getBody());
+            
             if (!response.getStatusCode().is2xxSuccessful() || !response.getBody().containsKey("access_token")) {
-                log.error("Failed to get access token from Keycloak");
+                log.error("Failed to get access token from Keycloak. Status: {}, Body: {}", response.getStatusCode(), response.getBody());
                 return null;
             }
             String accessToken = (String) response.getBody().get("access_token");
@@ -86,12 +89,17 @@ public class KeycloakAuthenticator extends AbstractSsoAuthenticator {
 
             // 2. 获取用户信息
             String userInfoEndpoint = String.format("%s/realms/%s/protocol/openid-connect/userinfo", keycloakAuthServerUrl, keycloakRealm);
+            log.info("User info endpoint: {}", userInfoEndpoint);
+            
             HttpHeaders userInfoHeaders = new HttpHeaders();
             userInfoHeaders.setBearerAuth(accessToken);
             HttpEntity<Void> userInfoEntity = new HttpEntity<>(userInfoHeaders);
             ResponseEntity<Map> userInfoResp = restTemplate.exchange(userInfoEndpoint, HttpMethod.GET, userInfoEntity, Map.class);
+            log.info("User info response status: {}", userInfoResp.getStatusCode());
+            log.info("User info response body: {}", userInfoResp.getBody());
+            
             if (!userInfoResp.getStatusCode().is2xxSuccessful()) {
-                log.error("Failed to get user info from Keycloak");
+                log.error("Failed to get user info from Keycloak. Status: {}, Body: {}", userInfoResp.getStatusCode(), userInfoResp.getBody());
                 return null;
             }
             Map userInfo = userInfoResp.getBody();
